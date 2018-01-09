@@ -6,8 +6,9 @@
 
 import React, {
   Component,
-  PropTypes
 } from 'react'
+import PropTypes from 'prop-types'; // ES6
+
 import {
   StyleSheet,
   View,

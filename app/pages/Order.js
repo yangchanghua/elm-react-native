@@ -12,7 +12,7 @@ import {
 import NavBar from '../component/NavBar'
 import TakeOut from './TakeOut'
 import Breakfast from './Breakfast'
-import TabViewBar from '../component/TabViewBar'
+import TabViewBar from '../component/SomeComp'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 export default class Order extends Component {

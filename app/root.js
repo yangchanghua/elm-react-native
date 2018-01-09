@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react'
 import Navigation from './app'
-import { View, Platform } from 'react-native'
+import { View, Platform, Text } from 'react-native'
 
 export default class rootApp extends Component {
   render() {

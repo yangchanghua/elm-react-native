@@ -1,5 +1,8 @@
 const React = require('react');
 const ReactNative = require('react-native');
+
+import PropTypes from 'prop-types'; // ES6
+
 const {
   StyleSheet,
   Text,
@@ -8,19 +11,18 @@ const {
   TouchableOpacity
 } = ReactNative;
 
-const DefaultTabBar = React.createClass({
-  propTypes: {
-    goToPage: React.PropTypes.func,
-    activeTab: React.PropTypes.number,
-    tabs: React.PropTypes.array,
-    backgroundColor: React.PropTypes.string,
-    activeTextColor: React.PropTypes.string,
-    inactiveTextColor: React.PropTypes.string,
+export default class MyDefTabBar extends React.Component {
+  static propTypes = {
+    activeTab: PropTypes.number,
+    tabs: PropTypes.array,
+    backgroundColor: PropTypes.string,
+    activeTextColor: PropTypes.string,
+    inactiveTextColor: PropTypes.string,
     textStyle: Text.propTypes.style,
     tabStyle: View.propTypes.style,
-    renderTab: React.PropTypes.func,
+    renderTab: PropTypes.func,
     underlineStyle: View.propTypes.style,
-  },
+  }
 
   getDefaultProps() {
     return {
@@ -28,10 +30,10 @@ const DefaultTabBar = React.createClass({
       inactiveTextColor: '#666',
       backgroundColor: "#fff",
     };
-  },
+  }
 
   renderTabOption(name, page) {
-  },
+  }
 
   renderTab(name, page, isTabActive, onPressHandler) {
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
@@ -52,7 +54,7 @@ const DefaultTabBar = React.createClass({
         </Text>
       </View>
     </TouchableOpacity>;
-  },
+  }
 
   render() {
     const containerWidth = this.props.containerWidth;
@@ -80,8 +82,8 @@ const DefaultTabBar = React.createClass({
         </Animated.View>
       </View>
     );
-  },
-});
+  }
+}
 
 const styles = StyleSheet.create({
   tab: {
@@ -96,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = DefaultTabBar;
+module.exports = MyDefTabBar;
