@@ -28,8 +28,6 @@ import LocalImg from '../images'
 import px2dp from '../util'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Swiper from 'react-native-swiper'
-import SplashScreen from 'react-native-splash-screen'
-
 import SearchView from '../component/SearchView'
 import LbsModal from '../component/LbsModal'
 import TabView from '../component/TabView'
@@ -62,7 +60,6 @@ export default class HomePage extends Component {
       this.SEARCH_FIX_DIFF_Y = headH-this.SEARCH_FIX_Y-headH
   }
   componentDidMount(){
-      SplashScreen.hide()
       BackAndroid.addEventListener('hardwareBackPress', function () {
           BackAndroid.exitApp(0)
           return true

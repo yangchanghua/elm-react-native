@@ -24,20 +24,15 @@ export default class MyDefTabBar extends React.Component {
     underlineStyle: View.propTypes.style,
   }
 
-  getDefaultProps() {
-    return {
-      activeTextColor: '#0398ff',
-      inactiveTextColor: '#666',
-      backgroundColor: "#fff",
-    };
-  }
-
-  renderTabOption(name, page) {
-  }
+    constructor(props){
+        super(props)
+        this.state = {
+            scrollY: new Animated.Value(0)
+        }
+    }
 
   renderTab(name, page, isTabActive, onPressHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
-    const textColor = isTabActive ? activeTextColor : inactiveTextColor;
+    const textColor = '#0398ff';
     const fontWeight = isTabActive ? 'bold' : 'normal';
 
     return <TouchableOpacity
@@ -48,8 +43,8 @@ export default class MyDefTabBar extends React.Component {
       accessibilityTraits='button'
       onPress={() => onPressHandler(page)}
     >
-      <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, fontSize: 13 }, textStyle, ]}>
+      <View style={[styles.tab ]}>
+        <Text style={[{color: textColor, fontWeight, fontSize: 13 }, ]}>
           {name}
         </Text>
       </View>
@@ -77,7 +72,7 @@ export default class MyDefTabBar extends React.Component {
           const renderTab = this.props.renderTab || this.renderTab;
           return renderTab(name, page, isTabActive, this.props.goToPage);
         })}
-        <Animated.View style={[tabUnderlineStyle, { left, }, this.props.underlineStyle, ]} >
+        <Animated.View >
           <View style={{height: 2, width: 35, backgroundColor: '#0398ff',}}></View>
         </Animated.View>
       </View>
