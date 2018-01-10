@@ -49,27 +49,6 @@ const RootTabs = TabNavigator({
             tabBarLabel: 'ProfileScreen',
         }
     },
-}, {
-    tabBarComponent: props => {
-        return (
-            <Footer>
-                <FooterTab>
-                    {
-                        tabNames.map((e, i) => {
-                            return
-                            (<Button
-                                vertical
-                                active={props.navigationState.index === i}
-                                onPress={() => props.navigation.navigate(e[2])}>
-                                <Icon name={e[1]}  size={px2dp(22)} color="#666" />
-                                <Text>{e[0]}</Text>
-                            </Button>)
-                        })
-                    }
-                </FooterTab>
-            </Footer>
-        );
-    }
 });
 
 export default RootTabs;
