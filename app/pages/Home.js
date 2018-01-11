@@ -35,6 +35,8 @@ import Bz from '../component/Bz'
 import DetailPage from './DetailPage'
 import data from '../data'
 
+import {Container, Title, Header, Left, Body, Right, Content, Button} from 'native-base';
+
 const isIOS = Platform.OS == "ios"
 const { width, height } = Dimensions.get('window')
 const headH = px2dp(isIOS?140:120)
@@ -43,8 +45,11 @@ const InputHeight = px2dp(28)
 export default class HomePage extends Component {
   constructor(props){
       super(props)
+
+      const {state} = this.props.navigation;
+
       this.state = {
-        location: "三里屯SOHO",
+        location: "华阳",
         scrollY: new Animated.Value(0),
         searchView: new Animated.Value(0),
         modalVisible: false,
@@ -65,7 +70,8 @@ export default class HomePage extends Component {
           return true
       })
   }
-  _renderHeader(){
+
+    _renderHeader(){
     let searchY = this.state.scrollY.interpolate({
       inputRange: [0, this.SEARCH_BOX_Y, this.SEARCH_FIX_Y, this.SEARCH_FIX_Y],
       outputRange: [0, 0, this.SEARCH_DIFF_Y, this.SEARCH_DIFF_Y]
@@ -79,50 +85,37 @@ export default class HomePage extends Component {
       outputRange: [1, 1, 0]
     })
     return (
-      <View style={styles.header}>
-        <Animated.View style={[styles.lbsWeather, {opacity: lbsOpaticy}]}>
-          <TouchableWithoutFeedback onPress={this.openLbs.bind(this)}>
-            <View style={styles.lbs}>
-              <Icon name="ios-pin" size={px2dp(18)} color="#fff" />
-              <Text style={{fontSize: px2dp(18), fontWeight: 'bold', color:"#fff", paddingHorizontal: 5}}>{this.state.location}</Text>
-              <Icon name="md-arrow-dropdown" size={px2dp(16)} color="#fff" />
-            </View>
-          </TouchableWithoutFeedback>
-          <View style={styles.weather}>
-            <View style={{marginRight: 5}}>
-              <Text style={{color: "#fff", fontSize: px2dp(11), textAlign: "center"}}>{"3°"}</Text>
-              <Text style={{color: "#fff", fontSize: px2dp(11)}}>{"阵雨"}</Text>
-            </View>
-            <Icon name="ios-flash-outline" size={px2dp(25)} color="#fff" />
-          </View>
-        </Animated.View>
-        <Animated.View style={{
-          marginTop: px2dp(15),
-          transform: [{
-            translateY: searchY
-          }]
-        }}>
-          <TouchableWithoutFeedback onPress={()=>{}}>
-            <View style={[styles.searchBtn, {backgroundColor: "#fff"}]}>
-              <Icon name="ios-search-outline" size={20} color="#666" />
-              <Text style={{fontSize: 13, color:"#666", marginLeft: 5}}>{"输入商家，商品名称"}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </Animated.View>
-        <Animated.View style={[styles.keywords, {opacity: keyOpaticy}]}>
-          {
-            ['肯德基','烤肉','吉野家','粥','必胜客','一品生煎','星巴克'].map((item, i) => {
-              return (
-                <TouchableWithoutFeedback key={i}>
-                  <View style={{marginRight: 12}}>
-                    <Text style={{fontSize: px2dp(12), color:"#fff"}}>{item}</Text>
-                  </View>
-                </TouchableWithoutFeedback>
-              )
-            })
-          }
-        </Animated.View>
-      </View>
+        <Header style={styles.header}>
+            <Left style={{flex: 2}}>
+                <Animated.View style={[styles.lbsWeather, {opacity: lbsOpaticy}]}>
+                    <TouchableWithoutFeedback onPress={this.openLbs.bind(this)}>
+                        <View style={styles.lbs}>
+                            <Icon name="ios-pin" size={px2dp(18)} color="#fff" />
+                            <Text style={{fontSize: px2dp(18), fontWeight: 'bold', color:"#fff", paddingHorizontal: 5}}>{this.state.location}</Text>
+                            <Icon name="md-arrow-dropdown" size={px2dp(16)} color="#fff" />
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Animated.View>
+            </Left>
+            <Body style={{flex: 6, justifyContent: 'space-between'}}>
+                <Animated.View style={{
+                    flex: 1,
+                    minWidth: px2dp(200),
+                    marginTop: px2dp(15),
+                    transform: [{
+                        translateY: searchY
+                    }]
+                }}>
+                    <TouchableWithoutFeedback onPress={()=>{}} >
+                        <View style={[styles.searchBtn, {backgroundColor: "#fff"}]}>
+                            <Icon name="ios-search-outline" size={20} color="#666" />
+                            <Text style={{fontSize: 13, color:"#666", marginLeft: 5}}>{"输入商家，商品名称"}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Animated.View>
+            </Body>
+            <Right/>
+        </Header>
     )
   }
   _renderFixHeader(){
@@ -163,7 +156,6 @@ export default class HomePage extends Component {
     })).start(() => {
       //this.setState({searchBtnShow: false})
     })
-    TabView.hideTabBar()
   }
   closeSearch(){
     if(this._scrollY>=this.SEARCH_FIX_Y){
@@ -449,8 +441,6 @@ export default class HomePage extends Component {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#0398ff",
-    height: headH,
-    paddingTop: px2dp(isIOS?30:10),
     paddingHorizontal: 16
   },
   typesView: {
@@ -508,9 +498,9 @@ const styles = StyleSheet.create({
     borderRadius: InputHeight,
     height: InputHeight,
     flexDirection: "row",
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center"
+      backgroundColor: "#fff",
+      justifyContent: "center",
+      alignItems: "center"
   },
   keywords: {
     marginTop: px2dp(14),
